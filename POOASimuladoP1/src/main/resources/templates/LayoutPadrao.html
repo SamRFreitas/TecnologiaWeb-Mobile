@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Convidados</title>
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+   <ul>
+   	<li> <a th:href='@{/}' >Home</a>
+   	<li> <a th:href='@{/localizacao}' >Localizacao</a>
+   	<li> <a th:href='@{/convidados}' >Convidados</a>
+   </ul>
+	<section layout:fragment="conteudo">
+		<p>Conteúdo principal ficará aqui</p>
+	</section>
+
+
+</body>
+</html>

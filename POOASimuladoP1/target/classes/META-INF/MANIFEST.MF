@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: POOASimulado
+Implementation-Version: 1.0.1
+Built-By: aluno
+Implementation-Vendor-Id: com.iff
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/POOASimulado
+Created-By: Maven Integration for Eclipse
+

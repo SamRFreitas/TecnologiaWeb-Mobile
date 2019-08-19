@@ -15,7 +15,6 @@ export class MesesPage implements OnInit {
   mes: Mes;
 
   constructor(private router: Router, public api: MesesService, public loadingController: LoadingController) { 
-      this.getMeses();
   }
 
   async getMeses(){
@@ -27,39 +26,42 @@ export class MesesPage implements OnInit {
       await loading.present();
       await this.api.getMeses()
       .subscribe(res => {
-      console.log(res);
-      this.meses = res;
-      loading.dismiss();
+        console.log(res);
+        this.meses = res;
+        loading.dismiss();
       }, err => {
-      console.log(err);
-      loading.dismiss();
+        console.log(err);
+        loading.dismiss();
     });
   }
 
-  ngOnInit() {
-    
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.getMeses();
   }
+
   addMes(){
     this.router.navigate(['/edit-mes', 0]);
   }
   editMes(id: number) {
     this.router.navigate(['/edit-mes', id]);
   }
-  // async removeMes(id: number){
-  //   const loading = await this.loadingController.create({
-  //     message: 'Apagando'
-  //   });
-  //   await loading.present();
-  //   await this.api.deleteMeses(id)
-  //   .subscribe(res => {
-  //     console.log(res);
-  //     this.getMeses();
-  //     loading.dismiss();
-  //   }, err => {
-  //     console.log(err);
-  //     loading.dismiss();
-  //   });
+  async removeMes(id: number){
+    const loading = await this.loadingController.create({
+      message: 'Apagando'
+    });
+    await loading.present();
+    await this.api.deleteMeses(id)
+    .subscribe(res => {
+      console.log(res);
+      this.getMeses();
+      loading.dismiss();
+    }, err => {
+      console.log(err);
+      loading.dismiss();
+    });
 
-  // }
+  }
 
 }

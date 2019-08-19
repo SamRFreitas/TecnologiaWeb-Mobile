@@ -13,24 +13,25 @@ const apiUrl = "http://localhost:8080/api/meses";
   providedIn: 'root'
 })
 export class MesesService {
-  getMeses: any;
+
 
   constructor(private http: HttpClient) { }
 
+  
   private handleError(error: HttpErrorResponse) {
-      if (error.error instanceof ErrorEvent) {
+    if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
-      } else {
+    } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       console.error(
-      `Backend returned code ${error.status}, ` +
-      `body was: ${error.error}`);
-      }
-      // return an observable with a user-facing error message
-      return throwError('Something bad happened; please try again later.');
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
     }
+    // return an observable with a user-facing error message
+    return throwError('Something bad happened; please try again later.');
+  }
 
   private extractData(res: Response) {
     let body = res;
@@ -38,31 +39,40 @@ export class MesesService {
     console.log(body || { });
     return body || { };
   }
+  getMeses(): Observable<any> {
+    return this.http.get(apiUrl, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+  
 
-  getMesesById(id: string): Observable<any> {
+  getMesesById(id: number): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http.get(url, httpOptions).pipe(
     map(this.extractData),
     catchError(this.handleError));
   }
 
-  postMeses(data): Observable<any> {
+  postMeses(meses:any): Observable<any> {
+    let data = JSON.stringify(meses);
     const url = `${apiUrl}`;
+    console.log('Postdata: '+data);
     return this.http.post(url, data, httpOptions)
-    .pipe(
-      catchError(this.handleError)
-    );
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-  updateMeses(id: string, data): Observable<any> {
-    const url = `${apiUrl}/${id}`;
+  updateMeses(mes:any): Observable<any> {
+    const url = `${apiUrl}`;
+    let data = JSON.stringify(mes);
     return this.http.put(url, data, httpOptions)
-    .pipe(
-      catchError(this.handleError)
-    );
+      .pipe(
+        catchError(this.handleError)
+      );
   }
   
-  deleteMeses(id: string): Observable<{}> {
+  deleteMeses(id: number) : Observable<{}> {
     const url = `${apiUrl}/${id}`;
     return this.http.delete(url, httpOptions)
     .pipe(

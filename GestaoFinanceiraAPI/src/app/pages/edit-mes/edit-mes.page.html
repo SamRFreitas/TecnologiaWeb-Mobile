@@ -5,18 +5,16 @@
  </ion-header>
  <ion-content padding>
     <ion-list>
+    <ion-input type="hidden" name="id" [(ngModel)]="mes.id"></ion-input>
+   
     <ion-item>
-    <ion-label stacked>Id</ion-label>
-    <ion-input type="text" name="id" [(ngModel)]="mes.id"></ion-input>
+       <ion-label stacked>Mes</ion-label>
+      <ion-input type="text" name="nome" [(ngModel)]="mes.nome"></ion-input>
     </ion-item>
     <ion-item>
-    <ion-label stacked>Mes</ion-label>
-    <ion-input type="text" name="nome" [(ngModel)]="mes.nome"></ion-input>
-    </ion-item>
-    <ion-item>
-    <ion-label stacked>Saldo</ion-label>
-    <ion-input type="text" name="qtde" [(ngModel)]="mes.saldo"></ion-input>
-    </ion-item>
+      <ion-label stacked>Saldo</ion-label>
+      <ion-input type="text" name="saldo" [(ngModel)]="mes.saldo"></ion-input>
+   </ion-item>
     </ion-list>
     <ion-button block (click)="save()">Salvar</ion-button>
  </ion-content>

@@ -7,11 +7,9 @@
 <ion-content>
     <ion-list>
     <ion-item-sliding *ngFor="let m of meses">
-    <!-- Link para edição-->
-    <ion-item (click)="editMes(m.id)">
-    <h2>{{m.nome}}</h2>
+      <ion-item (click)="editMes(m.id)">
+        <h2>{{m.nome}}</h2>
     </ion-item>
-    <!-- Botao para apagar-->
     <ion-item-options side="end">
     <ion-button color="danger" (click)="removeMes(m.id)">
     <ion-icon name="trash"></ion-icon>
@@ -20,7 +18,6 @@
     </ion-item-options>
     </ion-item-sliding>
     </ion-list>
-    <!-- Botao Novo-->
     <ion-fab>
     <ion-fab-button color="light" (click)="addMes()">
     <ion-icon name="add"></ion-icon>

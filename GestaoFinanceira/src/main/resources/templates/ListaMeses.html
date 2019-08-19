@@ -12,15 +12,22 @@
 			<h1 class="panel-title">Lista de Saldo por Mês</h1>
 		</div>
 		<div class="panel-body">
-
+                        
+                       
 			<form class="form-inline" method="POST" th:action="@{/meses}"
 				th:object="${mes}" style="margin: 20px 0">
+                            
 				<div class="form-group">
 					<input type="hidden" class="form-control" placeholder="Id"
 						th:field="*{id}" /> <input type="text" class="form-control"
 						placeholder="Nome" th:field="*{nome}" /> <input type="text"
 						class="form-control" placeholder="Saldo" th:field="*{saldo}" />
 					<button type="submit" class="btn btn-primary">Adicionar</button>
+                                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}">
+                                            <p th:each="erro : ${#fields.errors('*')}" 
+                                               th:text="${erro}">                    
+                                            </p>
+                                        </div>
 				</div>
 			</form>
 

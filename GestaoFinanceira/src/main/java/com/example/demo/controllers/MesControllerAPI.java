@@ -16,9 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.Mes;
 import com.example.demo.repositories.Meses;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RestController;
+import javax.validation.constraints.*;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@Controller
+
+@RestController
 @RequestMapping("/api/meses")
+@Validated 
 public class MesControllerAPI 
 {
 	@Autowired
@@ -45,7 +51,7 @@ public class MesControllerAPI
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> saveMes(Mes mes) {
+	public ResponseEntity<?> saveMes(@RequestBody Mes mes) {
 		return new ResponseEntity<Mes> (ms.save(mes), HttpStatus.OK);
 	}
 		

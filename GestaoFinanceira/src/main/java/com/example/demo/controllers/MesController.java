@@ -10,6 +10,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.Mes;
 import com.example.demo.repositories.Meses;
+import javax.validation.Valid;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 @RequestMapping("/meses")
@@ -29,8 +34,14 @@ public class MesController
 	}	
 	
 	@PostMapping 
-	public String salvar(Mes m) 
-	{
+	public String salvar(@ModelAttribute @Valid Mes m,
+                              BindingResult bindingResult,
+                              Model model) 
+	{       
+                if(bindingResult.hasErrors()){
+                    model.addAttribute("produtos", ms.findAll());
+                    return "ListaMeses";
+                }
 		ms.save(m);
 		return "redirect:/meses";
 	}
@@ -50,7 +61,5 @@ public class MesController
 		Mes m = ms.getOne(id);
 		mv.addObject( "mes",m);
 		return (mv);
-	}
-	
-	
+	}	
 }

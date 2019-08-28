@@ -10,6 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.Receita;
 import com.example.demo.repositories.Receitas;
+import javax.validation.Valid;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 @RequestMapping("/receitas")
@@ -30,8 +34,14 @@ public class ReceitaController
 	
 	
 	@PostMapping 
-	public String salvar(Receita r) 
-	{
+	public String salvar(@ModelAttribute @Valid Receita r, 
+                              BindingResult bindingResult,
+                              Model model) 
+	{       
+                if(bindingResult.hasErrors()){
+                    model.addAttribute("receitas", rc.findAll());
+                    return "ListaReceitas";
+                }
 		rc.save(r);
 		return "redirect:/receitas";
 	}

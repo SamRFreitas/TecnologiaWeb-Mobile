@@ -9,18 +9,24 @@
 
 	<div class="panel panel-default" style="margin: 10px">
 		<div class="panel-heading">
-			<h1 class="panel-title">Lista de Receitas</h1>
+			<h1 class="panel-title">Lista de Despesas</h1>
 		</div>
 		<div class="panel-body">
 
-			<form class="form-inline" method="POST" th:action="@{/receitas}"
-				th:object="${receita}" style="margin: 20px 0">
+			<form class="form-inline" method="POST" th:action="@{/despesas}"
+				th:object="${despesa}" style="margin: 20px 0">
 				<div class="form-group">
 					<input type="hidden" class="form-control" placeholder="Id"
 						th:field="*{id}" /> <input type="text" class="form-control"
 						placeholder="Nome" th:field="*{nome}" /> <input type="text"
 						class="form-control" placeholder="Valor" th:field="*{valor}" />
 					<button type="submit" class="btn btn-primary">Adicionar</button>
+                                        
+                                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}">
+                                            <p th:each="erro : ${#fields.errors('*')}" 
+                                               th:text="${erro}">                    
+                                            </p>
+                                        </div>
 				</div>
 			</form>
 
@@ -34,14 +40,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="r:${receitas}">
-						<td th:text="${r.id}">1</td>
-						<td th:text="${r.nome}">Samuel</td>
-						<td th:text="${r.valor}">300.0</td>
-						<td><a th:href="@{/receitas/alterar/} + ${r.id}"
-							class="glyphicon glyphicon-pencil"></a></td>
-						<td><a th:href="@{/receitas/excluir/} + ${r.id}"
-							class="glyphicon glyphicon-trash"></a></td>
+					<tr th:each="d:${despesas}">
+						<td th:text="${d.id}">1</td>
+						<td th:text="${d.nome}">Samuel</td>
+						<td th:text="${d.valor}">300.0</td>
+						<td><a th:href="@{/despesas/alterar/} + ${d.id}"
+							class="glyphicon glyphicon-pencil" ></a> 	
+						</td>
+						<td><a th:href="@{/despesas/excluir/} + ${d.id}"
+							class="glyphicon glyphicon-trash" ></a></td>
 					</tr>
 				</tbody>
 			</table>

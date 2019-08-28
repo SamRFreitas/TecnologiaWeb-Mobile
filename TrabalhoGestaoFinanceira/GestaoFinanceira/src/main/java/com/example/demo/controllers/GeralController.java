@@ -1,20 +1,23 @@
 package com.example.demo.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
 public class GeralController{
-        
-                @GetMapping
-                public String login() {
-			return "redirect:/login";
+        	
+                @PostMapping
+		public String homePost() {
+                    System.out.println("com.example.demo.controllers.GeralController.homePost()");
+                    return "redirect:/";
 		}
-		   
-		@GetMapping("/home")
+    
+		@GetMapping
 		public ModelAndView home() {
+                    System.out.println("com.example.demo.controllers.GeralController.home()");
 			ModelAndView mv = new ModelAndView("MenuPrincipal");
 			return(mv);
 		}

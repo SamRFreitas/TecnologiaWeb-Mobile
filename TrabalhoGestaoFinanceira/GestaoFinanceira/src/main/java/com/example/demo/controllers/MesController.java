@@ -39,7 +39,7 @@ public class MesController
                               Model model) 
 	{       
                 if(bindingResult.hasErrors()){
-                    model.addAttribute("produtos", ms.findAll());
+                    model.addAttribute("meses", ms.findAll());
                     return "ListaMeses";
                 }
 		ms.save(m);
@@ -59,7 +59,7 @@ public class MesController
 		ModelAndView mv = new ModelAndView("ListaMeses");
 		mv.addObject("meses",ms.findAll());
 		Mes m = ms.getOne(id);
-		mv.addObject( "mes",m);
+		mv.addObject("mes",m);
 		return (mv);
 	}	
 }
